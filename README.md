@@ -5,15 +5,14 @@ All four temporal knowledge graph datasets proposed in this paper can be downloa
 <img width="1230" alt="image" src="https://github.com/zjs123/TKG-Benchmark/blob/main/dataset_statics.png">
 
 ### Data Format
-Each graph is preserved through three files.
-* __edge_list.csv:__ stores each edge in DyTAG as a tuple. i.e., `(u, r, i, ts, label)`. `u` is the id of the source entity, `i` is the id of the target entity, `r` is the id of the relation between them, `ts` is the occurring timestamp of this edge, `label` is the label of this edge.
-* __entity_text.csv:__ stores the mapping from entity ids (e.g., `u` and `i`) to the text descriptions of entities.
-* __relation_text.csv:__ stores the mapping from relation ids (e.g., `r`) to the text descriptions of relations.
-
-### Usage
-* After downloading the datasets, they should be uncompressed into the `DyLink_Datasets` folder.
-* Run `get_pretrained_embeddings.py` to obtain the Bert-based node and edge text embeddings. They will be saved as `e_feat.npy` and `r_feat.npy` respectively.
-* Run `get_LLM_data.ipynb` to get the train and test set for the textual relation generation task. They will be saved as `LLM_train.pkl` and `LLM_test.pkl` respectively.
+Each dataset is preserved as a pickle file, which consists of 6 items.
+* __train_split_time:__ stores the final timestamp of the training set.
+* __valid_split_time:__ stores the final timestamp of the validation set.
+* __train_set:__ stores the knowledge for training, which consists of timestamp knowledge in the form of (s,r,o,t), and time-interval knowledge in the form of (s,r,o,t_s, t_e).
+* __valid_set:__ stores the knowledge for validation, which consists of timestamp knowledge in the form of (s,r,o,t), and time-interval knowledge in the form of (s,r,o,t_s, t_e).
+* __test_set:__ stores the knowledge for test, which consists of timestamp knowledge in the form of (s,r,o,t), and time-interval knowledge in the form of (s,r,o,t_s, t_e).
+* __e_2_des_dict:__ stores the mapping from the original entity name to its short textual descriptions.
+After downloading the datasets, they should be uncompressed into the `datasets` folder.
 
 ## Reproduce the Results
 

@@ -67,7 +67,7 @@ def predict_chatgpt(prompt, args):
         {"role": "user", "content": prompt},
     ]
     
-    client = OpenAI(api_key="sk-zk23054f3c2c498f9845a03dca1aea540c96931950e2cac3", base_url="https://api.zhizengzeng.com/v1/")
+    client = OpenAI(api_key="", base_url="")
     completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=prompt,
@@ -105,7 +105,7 @@ def predict_chatgpt_span(prompt, args):
         {"role": "user", "content": prompt},
     ]
     
-    client = OpenAI(api_key="sk-zk23054f3c2c498f9845a03dca1aea540c96931950e2cac3", base_url="https://api.zhizengzeng.com/v1/")
+    client = OpenAI(api_key="", base_url="")
     try:
         completion = client.chat.completions.create(
                 model="gpt-4o-mini", #"gpt-3.5-turbo",

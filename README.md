@@ -21,11 +21,13 @@ After downloading the datasets, they should be uncompressed into the `datasets` 
 ### Generative Knowledge Forecasting Task
 * Example of training *TNT* on *FinWiki* dataset:
 ```{bash}
+cd framework
 python tkge.py train --config config/example_tnt_FinWiki_stamp.yaml
 ```
 
 * Example of run *TKG-ICL* on *FinWiki* dataset:
 ```{bash}
+cd TKG-ICL
 python run_openai.py --dataset FinWiki
 ```
 * The metrics on the test set  will be automatically saved in `results/TNT/FinWiki/ex0000/logging/` folder
@@ -34,11 +36,13 @@ python run_openai.py --dataset FinWiki
 ### Knowledge Obsolescence Prediction Task
 * Example of training *TNT* on *FinWiki* dataset:
 ```{bash}
+cd framework
 python tkge.py train --config config/example_tnt_FinWiki_span.yaml
 ```
 
 * Example of run *TKG-ICL* on *FinWiki* dataset:
 ```{bash}
+cd TKG-ICL
 python run_openai_span.py --dataset FinWiki
 ```
 * The metrics on the test set  will be automatically saved in `results/TNT/FinWiki/ex0000/logging/` folder

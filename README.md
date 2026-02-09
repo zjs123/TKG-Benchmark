@@ -1,8 +1,8 @@
-# [Towards Better Evolution Modeling for Temporal Knowledge Graphs (Submitted to KDD 2026)]
+# [Towards Better Evolution Modeling for Temporal Knowledge Graphs (Submitted to KDD 2026)]()
 
 ## Dataset
 All four temporal knowledge graph datasets proposed in this paper can be downloaded from [here](https://drive.google.com/file/d/12DE8HfA5JogHcsrXi4oPxIIsAcX7cjlR/view?usp=sharing).
-<img width="1230" alt="image" src="https://github.com/zjs123/DTGB/assets/17922610/2f714dd7-7928-4eed-8e55-8e1fa947e463">
+<img width="1230" alt="image" src="https://github.com/zjs123/TKG-Benchmark">
 
 ### Data Format
 Each graph is preserved through three files.

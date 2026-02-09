@@ -2,7 +2,7 @@
 
 ## Dataset
 All four temporal knowledge graph datasets proposed in this paper can be downloaded from [here](https://drive.google.com/file/d/12DE8HfA5JogHcsrXi4oPxIIsAcX7cjlR/view?usp=sharing).
-<img width="1230" alt="image" src="[https://github.com/zjs123/TKG-Benchmark](https://github.com/zjs123/TKG-Benchmark/blob/main/dataset_statics.png)">
+<img width="1230" alt="image" src="https://github.com/zjs123/TKG-Benchmark/blob/main/dataset_statics.png">
 
 ### Data Format
 Each graph is preserved through three files.

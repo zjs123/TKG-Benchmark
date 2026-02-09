@@ -1,0 +1,146 @@
+console:
+  quiet: False
+  format: {}
+  echo: True
+  log_level: info
+
+#local
+task:
+  folder: /home/zhangjs/experiments/TKGbenchmark/results
+  type: train
+  device: 'cuda'
+  task_form: stamp # original[s,r,?,t] stamp[s.?,?,t] span_end[s,r,t,t_s,?]
+  reciprocal_training: true
+
+random_seed:
+  default: -1
+  python: -1
+  torch: -1
+  numpy: -1
+  numba: -1
+
+
+# local
+dataset:
+  folder: /home/zhangjs/experiments/TKGbenchmark/datasets/Wikidata
+
+  # indexes mapping [false, true]
+  # TODO 可以保存到cache
+  mapping: False
+  filter: False
+  temporal:
+    resolution: "year" # month for FinWiki; year for YAGO; day for WikiICEWS
+    index: True
+    float: False
+  args: ~
+
+  name: 'stamp_span'
+  num_entities: -1
+  num_relations: -1
+  pickle: True
+
+negative_sampling:
+  type: 'basic'
+  num_samples: 50 #500
+  filter: False
+  as_matrix: True
+  target: ro #[head, tail]->original [ro]-> for stamp task [time]->for span_end task
+  args: ~
+
+
+model:
+  type: de-simple
+  dropout: 0.4
+  embedding:
+    emb_dim: 160
+    se_prop: 0.32
+    global:
+      dim: 160
+      init: xavier_uniform
+
+  args: ~
+
+
+
+train:
+  # Split used for training (specified under 'data.files').
+  split: train
+  type: negative_sampling
+
+  loss:
+    type: cross_entropy_loss
+    args: ~
+
+  max_epochs: 100 #100
+
+
+  loader:
+    num_workers: 10
+    pin_memory: True
+    drop_last: False
+    timeout: 0
+
+  valid:
+    split: valid # in [test or valid]
+    every: 10
+    batch_size: 64
+    subbatch_size: -1
+    filter: time-aware  # in [off, static, time-aware]
+    ordering: optimistic    # in [optimistic, peesimistic]
+    k: [1, 50, 100, 500]
+
+    early_stopping:
+      early_stop: True
+      patience: 30
+      epochs: 50
+      metric_thresh: 0.1
+
+  batch_size: 512
+  subbatch_size: 64
+  subbatch_adaptive: True
+  optimizer:
+    type: Adam
+    args:
+      lr: 0.001
+
+    default:
+      type: Adam           # sgd, adagrad, adam
+
+      args:
+        +++: +++
+
+  regularizer:
+    entity_reg:
+      type: none_regularize
+      weight: 0.0
+      args: ~
+    relation_reg:
+      type: none_regularize
+      weight: 0.0
+      args: ~
+#    temporal_reg:
+#      type: no_regularize
+#      weight: 0.01
+#      args: ~
+  inplace_regularizer: ~
+
+  lr_scheduler: ""
+
+  lr_scheduler_args:
+    +++: +++
+
+  trace_level: epoch           # batch, epoch
+
+  checkpoint:
+    every: 50
+    keep: 3
+
+  auto_correct: False
+  abort_on_nan: True
+  visualize_graph: False
+
+eval:
+  filter: time-aware
+  ordering: descending
+  preference: optimistic
+  k: [1,50,100,500]
